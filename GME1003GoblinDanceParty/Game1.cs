@@ -22,6 +22,7 @@ namespace GME1003GoblinDanceParty
         private List<Color> _starColor; //list of colors
 
         private Texture2D _starSprite;  //the sprite image for our star
+        private Texture2D _background;
 
         private Random _rng;            //for all our random number needs
 
@@ -101,6 +102,8 @@ namespace GME1003GoblinDanceParty
             goblin = new Goblin(Content.Load<Texture2D>("goblinIdleSpriteSheet"), 400, 400);
             music = Content.Load<Song>("chiptune");
 
+            _background = Content.Load<Texture2D>("background");
+
             //if you're tired of the music player, comment this out!
             MediaPlayer.Play(music);
 
@@ -125,8 +128,10 @@ namespace GME1003GoblinDanceParty
 
             _spriteBatch.Begin();
 
-            //it would be great to have a background image here! 
-            //you could make that happen with a single Draw statement.
+            // Draws background and resizes it to fill window
+            _spriteBatch.Draw(_background,
+                destinationRectangle: new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight),
+                color: Color.White);
 
             //this is where we draw the stars...
             for (int i = 0; i < _numStars; i++)
